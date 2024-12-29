@@ -44,6 +44,21 @@ function render() {
     contentDiv.innerHTML = tableHtml;
 }
 
+function restartGame(){
+    fields = [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+    ];
+    render();
+}
+
 function handleClick(cell, index) {
     if (fields[index] === null) {
         fields[index] = currentPlayer;
@@ -61,6 +76,7 @@ function handleClick(cell, index) {
 function isGameFinished() {
     return fields.every((field) => field !== null) || getWinningCombination() !== null;
 }
+
 function getWinningCombination() {
     for (let i = 0; i < winningCombinations.length; i++) {
         const [a, b, c] = winningCombinations[i];
@@ -106,6 +122,7 @@ function generateCrossSVG() {
 function drawWinningLine(combination) {
     const lineColor = '#ffffff';
     const lineWidth = 5;
+
     const startCell = document.querySelectorAll(`td`)[combination[0]];
     const endCell = document.querySelectorAll(`td`)[combination[2]];
     const startRect = startCell.getBoundingClientRect();
